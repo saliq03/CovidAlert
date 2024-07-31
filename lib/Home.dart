@@ -1,4 +1,5 @@
 
+import 'package:covidalert/CountriesPage.dart';
 import 'package:covidalert/Services/StatesServices.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -87,16 +88,21 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                          ),
                        ),
                        const SizedBox(height: 20,),
-                       Container(
-                         padding:const EdgeInsets.symmetric(vertical: 15),
-                         margin:const EdgeInsets.symmetric(horizontal: 20),
-                         width: MediaQuery.of(context).size.width,
-                         decoration: BoxDecoration(
-                             color: Colors.green,
-                             borderRadius: BorderRadius.circular(11)
-                         ),
-                         child:const Center(child: Text("Track Countries",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 20),)),
+                       GestureDetector(
+                         onTap:(){
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Countriespage()));
+                           },
+                         child: Container(
+                           padding:const EdgeInsets.symmetric(vertical: 15),
+                           margin:const EdgeInsets.symmetric(horizontal: 20),
+                           width: MediaQuery.of(context).size.width,
+                           decoration: BoxDecoration(
+                               color: Colors.green,
+                               borderRadius: BorderRadius.circular(11)
+                           ),
+                           child:const Center(child: Text("Track Countries",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 20),)),
 
+                         ),
                        )
                      ],
                    );
