@@ -1,9 +1,8 @@
-import 'dart:math';
 
 import 'package:covidalert/Models/CountriesJsonModel.dart';
 import 'package:covidalert/Services/StatesServices.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_shakemywidget/flutter_shakemywidget.dart';
 class Countriespage extends StatefulWidget {
   const Countriespage({super.key});
 
@@ -99,7 +98,13 @@ class _CountriespageState extends State<Countriespage> {
                       );
                     }
                     else{
-                      return Text('loading');
+                      return ShimmerContainer(
+                        height: 80,
+                        width: 350,
+                        radius: 4,
+                        highlightColor: Color(0xffF9F9FB),
+                        baseColor: Color(0xffE6E8EB),
+                      );
                     }
                   })
             ],
