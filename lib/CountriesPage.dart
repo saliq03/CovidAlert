@@ -2,7 +2,8 @@
 import 'package:covidalert/Models/CountriesJsonModel.dart';
 import 'package:covidalert/Services/StatesServices.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_shakemywidget/flutter_shakemywidget.dart';
+import 'package:shimmer/shimmer.dart';
+
 class Countriespage extends StatefulWidget {
   const Countriespage({super.key});
 
@@ -98,12 +99,24 @@ class _CountriespageState extends State<Countriespage> {
                       );
                     }
                     else{
-                      return ShimmerContainer(
-                        height: 80,
-                        width: 350,
-                        radius: 4,
-                        highlightColor: Color(0xffF9F9FB),
-                        baseColor: Color(0xffE6E8EB),
+                      return ListView.builder(
+                        itemCount: 4,
+                        itemBuilder: (BuildContext context, int index) {
+                         return Shimmer.fromColors(
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: Container(height: 50,width: 50,color: Colors.white,),
+                                    title: Container(height: 10,width: 90,color: Colors.white,),
+                                    subtitle:Container(height: 10,width: 90,color: Colors.white,),
+                                  ),
+                                  SizedBox(height: 10,)
+                                ],
+                              ),
+                              baseColor: Colors.blue,
+                              highlightColor: Colors.redAccent);
+                        },
+
                       );
                     }
                   })
