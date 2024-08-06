@@ -20,36 +20,36 @@ class _CountriespageState extends State<Countriespage> {
       backgroundColor: Colors.black26,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TextField(
                 controller: searchController,
                 onChanged: (value){
                   setState(() {});
                 },
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: "Search country",
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(Icons.search,color: Colors.white,),
+                  hintStyle: const TextStyle(color: Colors.white),
+                  prefixIcon: const Icon(Icons.search,color: Colors.white,),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.white,
                       width: 2
                     )
                   ),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.white,
                       )
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               FutureBuilder(
                   future: statesServices.CountriesData(),
                   builder: (context,AsyncSnapshot<List<CountriesJsonModel>> snapshot){
@@ -67,10 +67,10 @@ class _CountriespageState extends State<Countriespage> {
                                     width: 70,
                                     image: NetworkImage(snapshot.data![index].countryInfo!.flag!),
                                   ),
-                                  title: Text(name,style: TextStyle(color: Colors.white,fontSize: 20),),
-                                  subtitle:Text(snapshot.data![index].cases!.toString(),style: TextStyle(color: Colors.white),),
+                                  title: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20),),
+                                  subtitle:Text(snapshot.data![index].cases!.toString(),style: const TextStyle(color: Colors.white),),
                                 ),
-                                SizedBox(height: 10,)
+                                const SizedBox(height: 10,)
                               ],
                             );
                           }
@@ -83,10 +83,10 @@ class _CountriespageState extends State<Countriespage> {
                                     width: 70,
                                     image: NetworkImage(snapshot.data![index].countryInfo!.flag!),
                                   ),
-                                  title: Text(name,style: TextStyle(color: Colors.white,fontSize: 20),),
-                                  subtitle:Text(snapshot.data![index].cases!.toString(),style: TextStyle(color: Colors.white),),
+                                  title: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20),),
+                                  subtitle:Text(snapshot.data![index].cases!.toString(),style: const TextStyle(color: Colors.white),),
                                 ),
-                                SizedBox(height: 10,)
+                                const SizedBox(height: 10,)
                               ],
                             );
                           }
@@ -99,24 +99,26 @@ class _CountriespageState extends State<Countriespage> {
                       );
                     }
                     else{
-                      return ListView.builder(
-                        itemCount: 4,
-                        itemBuilder: (BuildContext context, int index) {
-                         return Shimmer.fromColors(
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    leading: Container(height: 50,width: 50,color: Colors.white,),
-                                    title: Container(height: 10,width: 90,color: Colors.white,),
-                                    subtitle:Container(height: 10,width: 90,color: Colors.white,),
-                                  ),
-                                  SizedBox(height: 10,)
-                                ],
-                              ),
-                              baseColor: Colors.blue,
-                              highlightColor: Colors.redAccent);
-                        },
-
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: 4,
+                          itemBuilder: (BuildContext context, int index) {
+                           return Shimmer.fromColors(
+                                baseColor: Colors.grey.shade700,
+                                highlightColor: Colors.grey.shade100,
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      leading:Container(height: 50,width: 50,color: Colors.white,),
+                                      title: Container(height: 10,width: 90,color: Colors.white,),
+                                      subtitle:Container(height: 8,color: Colors.white,),
+                                    ),
+                                   const SizedBox(height: 10,)
+                                  ],
+                                ));
+                          },
+                        
+                        ),
                       );
                     }
                   })
