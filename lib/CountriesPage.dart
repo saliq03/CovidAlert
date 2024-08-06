@@ -13,8 +13,18 @@ class Countriespage extends StatefulWidget {
 }
 
 class _CountriespageState extends State<Countriespage> {
+  final ScrollController _scrollController=ScrollController();
   StatesServices statesServices=StatesServices();
   TextEditingController searchController=TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _scrollController.addListener((){
+      FocusScope.of(context).unfocus();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,12 +66,14 @@ class _CountriespageState extends State<Countriespage> {
                   builder: (context,AsyncSnapshot<List<CountriesJsonModel>> snapshot){
                     if(snapshot.hasData){
                       return Expanded(
-                        child: ListView.builder(itemCount: snapshot.data!.length,
+                        child: ListView.builder(controller: _scrollController,
+                            itemCount: snapshot.data!.length,
                             itemBuilder: (context,index){
                           String name=snapshot.data![index].country!;
                           if(searchController.text==''){
                             return GestureDetector(
                               onTap: (){
+                                FocusScope.of(context).unfocus();
                                 Navigator.push(context, MaterialPageRoute(builder:(context)=>Detailed(
                                     name: name,
                                     cases: snapshot.data![index].cases!.toString(),
@@ -92,6 +104,7 @@ class _CountriespageState extends State<Countriespage> {
                           else if(name.toLowerCase().contains(searchController.text.toLowerCase())){
                             return GestureDetector(
                               onTap: (){
+                                FocusScope.of(context).unfocus();
                                 Navigator.push(context, MaterialPageRoute(builder:(context)=>Detailed(
                                     name: name,
                                     cases: snapshot.data![index].cases!.toString(),
