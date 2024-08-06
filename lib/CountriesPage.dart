@@ -1,4 +1,5 @@
 
+import 'package:covidalert/Detailed.dart';
 import 'package:covidalert/Models/CountriesJsonModel.dart';
 import 'package:covidalert/Services/StatesServices.dart';
 import 'package:flutter/material.dart';
@@ -59,35 +60,63 @@ class _CountriespageState extends State<Countriespage> {
                             itemBuilder: (context,index){
                           String name=snapshot.data![index].country!;
                           if(searchController.text==''){
-                            return Column(
-                              children: [
-                                ListTile(
-                                  leading: Image(
-                                    height: 50,
-                                    width: 70,
-                                    image: NetworkImage(snapshot.data![index].countryInfo!.flag!),
+                            return GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder:(context)=>Detailed(
+                                    name: name,
+                                    cases: snapshot.data![index].cases!.toString(),
+                                    flag: snapshot.data![index].countryInfo!.flag!,
+                                    deaths: snapshot.data![index].deaths!.toString(),
+                                    recovered: snapshot.data![index].recovered!.toString(),
+                                    active: snapshot.data![index].active!.toString(),
+                                    population: snapshot.data![index].population!.toString(),
+                                    critical: snapshot.data![index].critical!.toString(),
+                                    todayRecovered: snapshot.data![index].todayRecovered!.toString())));
+                              },
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: Image(
+                                      height: 50,
+                                      width: 70,
+                                      image: NetworkImage(snapshot.data![index].countryInfo!.flag!),
+                                    ),
+                                    title: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20),),
+                                    subtitle:Text(snapshot.data![index].cases!.toString(),style: const TextStyle(color: Colors.white),),
                                   ),
-                                  title: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20),),
-                                  subtitle:Text(snapshot.data![index].cases!.toString(),style: const TextStyle(color: Colors.white),),
-                                ),
-                                const SizedBox(height: 10,)
-                              ],
+                                  const SizedBox(height: 10,)
+                                ],
+                              ),
                             );
                           }
                           else if(name.toLowerCase().contains(searchController.text.toLowerCase())){
-                            return Column(
-                              children: [
-                                ListTile(
-                                  leading: Image(
-                                    height: 50,
-                                    width: 70,
-                                    image: NetworkImage(snapshot.data![index].countryInfo!.flag!),
+                            return GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder:(context)=>Detailed(
+                                    name: name,
+                                    cases: snapshot.data![index].cases!.toString(),
+                                    flag: snapshot.data![index].countryInfo!.flag!,
+                                    deaths: snapshot.data![index].deaths!.toString(),
+                                    recovered: snapshot.data![index].recovered!.toString(),
+                                    active: snapshot.data![index].active!.toString(),
+                                    population: snapshot.data![index].population!.toString(),
+                                    critical: snapshot.data![index].critical!.toString(),
+                                    todayRecovered: snapshot.data![index].todayRecovered!.toString())));
+                              },
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    leading: Image(
+                                      height: 50,
+                                      width: 70,
+                                      image: NetworkImage(snapshot.data![index].countryInfo!.flag!),
+                                    ),
+                                    title: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20),),
+                                    subtitle:Text(snapshot.data![index].cases!.toString(),style: const TextStyle(color: Colors.white),),
                                   ),
-                                  title: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20),),
-                                  subtitle:Text(snapshot.data![index].cases!.toString(),style: const TextStyle(color: Colors.white),),
-                                ),
-                                const SizedBox(height: 10,)
-                              ],
+                                  const SizedBox(height: 10,)
+                                ],
+                              ),
                             );
                           }
                           else{

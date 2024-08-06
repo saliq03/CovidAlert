@@ -1,3 +1,4 @@
+import 'package:covidalert/Detailed.dart';
 import 'package:covidalert/SplashScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      home:const SplashScreen()
     );
   }
 }
