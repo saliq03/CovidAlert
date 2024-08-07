@@ -1,4 +1,4 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:covidalert/Services/StatesServices.dart';
 import 'package:flutter/material.dart';
 
@@ -19,32 +19,30 @@ class _dropdownButtonState extends State<Dropdown> {
       body: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              FutureBuilder(
+          child: FutureBuilder(
                   future:statesServices.CountriesData(),
                   builder: (context, snapshot) {
-                    return DropdownButton(
-                        hint: Text("Select value"),
-                        value: selectedvalue,
-                        items:snapshot.data!.map((e){
-                          return DropdownMenuItem(
-                              value: e.country!,
-                              child:Text(e.country!)
-                          );
-                        }).toList(),
-                        onChanged: (value){
-                          selectedvalue=value;
-                          setState(() {});
-                        });
+
+                    if(snapshot.hasData){
+                      return DropdownButton(
+                          hint: Text("Select value"),
+                          value: selectedvalue,
+                          items:snapshot.data!.map((e){
+                            return DropdownMenuItem(
+                                value: e.country!,
+                                child:Text(e.country!)
+                            );
+                          }).toList(),
+                          onChanged: (value){
+                            selectedvalue=value;
+                            setState(() {});
+                          });
+                    }
+                    else{
+                      return Center(child: CircularProgressIndicator());
+                    }
                   }),
-
-              SizedBox(height: 30,),
-              selectedvalue!=null?Text(selectedvalue):Text('none')
-            ],
           )
-
-      ),
     );
   }
 }
